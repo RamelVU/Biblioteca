@@ -1,0 +1,17 @@
+<div class="modal-dialog modals-default" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            Eliminacion de Usuario
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body text-center" style="font-size: 20px;"> {% csrf_token %}
+            <strong>¿Desea eliminar {{object}}?</strong>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" onclick="cerrar_modal_eliminacion();">Cancelar</button>
+            <button  id="boton_creacion" class="btn btn-danger" type="button" onclick="eliminar({{object.pk}});">Confirmar</button>
+        </div>
+    </div>
+</div>

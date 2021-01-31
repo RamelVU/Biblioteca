@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}Listar Usuarios{% endblock titulo %}
+
+{% block contenido %}
+    {% if usuarios %}
+    <div class="row">
+        <div class="col-xl-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <strong class="card-title">Listado de Usuarios</strong>
+                        </div>
+                        <div class="col-md-4 text-right">  
+                            <a href="{% url 'usuario:registrar_usuario' %}"><button type="button" class="btn btn-primary">Crear Usuario</button>
+                        </div>
+                    </div>
+                </div>
+                {% comment %} <div class="card-body"> {% endcomment %}
+                    <div class="table-stats order-table ov-h">
+                        <table id="tabla_usuarios" class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for usuario in usuarios %}
+                                    <tr>
+                                        <td>{{usuario.id}}</td>
+                                        <td>{{usuario.username}}</td>
+                                        <td>{{usuario.nombres}}</td>
+                                        <td>{{usuario.apellidos}}</td>
+                                        <td>
+                                            {% comment %} <a href="{% url 'usuario:editar_usuario' usuario.id %}"><button type="button" class="btn btn-primary">Editar</button></a>
+                                            <a href="{% url 'libro:eliminar_libro' usuario.id %}"><button type="button" class="btn btn-danger">Eliminar</button></a> {% endcomment %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% comment %} </div> {% endcomment %}
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <h1>No existen usuarios registrados</h1>
+        <a href="{% url 'usuario:registrar_usuario' %}"><button type="button" class="btn btn-primary">Crear Usuario</button>
+    {% endif %}
+
+{% endblock contenido %}
+
+
+{% block extrajs %}
+    <script src="{% static  'assets/js/usuarios/index.js' %}"></script>
+{% endblock extrajs %}

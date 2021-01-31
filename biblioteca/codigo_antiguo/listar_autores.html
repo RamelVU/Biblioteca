@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Listar Autores{% endblock titulo %}
+
+{% block contenido %}
+    {% if autores %}
+    <div class="row">
+        <div class="col-xl-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <strong class="card-title">Listado de Autores</strong>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-stats order-table ov-h">
+                        <table id="tabla_autores" class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Nacionalidad</th>
+                                    <th>Descripción</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <h1>No existen autores registrados</h1>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-xl-8 mx-auto">
+            <form method="POST">
+                {% csrf_token %}
+                {% if error %}
+                    <h2>{{ error }}</h2>
+                {% else %}
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Formulario de Registro</strong>
+                        </div>
+                        <div class="card-body card-block">
+                            <form method="POST" enctype="multipart/form-data" class="form-horizontal">
+                                <div class="row form-group">
+                                    <div class="col col-md-4">{{ form.nombre.label }}</div>
+                                    <div class="col-12 col-md-8">{{ form.nombre }}</div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4">{{ form.apellido.label }}</div>
+                                    <div class="col-12 col-md-8">{{ form.apellido }}</div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4">{{ form.nacionalidad.label }}</div>
+                                    <div class="col-12 col-md-8">{{ form.nacionalidad }}</div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-4">{{ form.descripcion.label }}</div>
+                                    <div class="col-12 col-md-8">{{ form.descripcion }}</div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Registrar</button>
+                                    <a href="{% url 'libro:listar_autor' %}"><button type="button" class="btn btn-danger">Cancelar</button></a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+{% endblock contenido %}
+
