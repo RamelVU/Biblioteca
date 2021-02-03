@@ -5,7 +5,8 @@ from .models import *
 class AutorForm(forms.ModelForm):
     class Meta:
         model = Autor
-        fields =['nombre', 'apellido', 'nacionalidad', 'descripcion']
+        # fields =['nombre', 'apellido', 'nacionalidad', 'descripcion']
+        fields =['nombre', 'apellido']
         labels = {
             'nombre': 'Nombre', 
             'apellido': 'Apellidos', 
@@ -13,10 +14,10 @@ class AutorForm(forms.ModelForm):
             'descripcion': 'Descripción'
         }
         widgets = {
-            'nombre': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Ingrese el nombre', 'id':'nombre'}),
-            'apellido': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Ingrese los apellidos', 'id':'apellido'}), 
-            'nacionalidad': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Ingrese la nacionalidad', 'id':'nacionalidad'}), 
-            'descripcion': forms.Textarea(attrs={'class':'form-control', 'placeholder':'Ingrese la descripcion', 'id':'descripcion'})
+            'nombre': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Ingrese el nombre', }),
+            'apellido': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Ingrese los apellidos', }), 
+            # 'nacionalidad': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Ingrese la nacionalidad', 'id':'nacionalidad'}), 
+            # 'descripcion': forms.Textarea(attrs={'class':'form-control', 'placeholder':'Ingrese la descripcion', 'id':'descripcion'})
         }
 
 class LibroForm(forms.ModelForm):

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}Formset Autor{% endblock titulo %}
+
+{% block extracss %}
+<link rel="stylesheet" href=" {% static 'assets/css/lib/datatable/dataTables.bootstrap.min.css' %}">
+{% endblock extracss %}
+
+{% block contenido %}
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h2><strong>Creación de Autores con FormSets</strong></h2>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <button type="button" class="btn btn-default" onclick="agregar_inputs();">Agregar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form.management_form }}
+                        {% for fo in form %}
+                        <div id="form_autores" class="row">
+                            {{fo}}
+                        </div>
+                        <br>
+                        {% endfor %}
+                        
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                    </form>
+            </div>
+        </div>
+    </div>
+{% endblock contenido %}
+
+
+{% block extrajs %}
+
+    <script>
+        function agregar_inputs(){
+            var total_forms = document.querySelector('#id_form-TOTAL_FORMS');
+            
+            //nuevo label e input para nombre
+            var nuevo_label_nombre = document.createElement('label');
+            nuevo_label_nombre.innerHTML = 'Nombre del Autor';
+            var nuevo_input_nombre = document.querySelector('#id_form-0-nombre').cloneNode(true);
+            nuevo_input_nombre.name = 'form-'+total_forms.value+'-nombre';
+            nuevo_input_nombre.id = 'id_form-'+total_forms.value+'-nombre';
+
+            //nuevo label e input para apellidos
+            var nuevo_label_apellido = document.createElement('label');
+            nuevo_label_apellido.innerHTML = 'Apellidos';
+            var nuevo_input_apellido = document.querySelector('#id_form-0-apellido').cloneNode(true);
+            nuevo_input_apellido.name = 'form-'+total_forms.value+'-apellido';
+            nuevo_input_apellido.id = 'id_form-'+total_forms.value+'-apellido';
+
+            //agregamos los elementos creados
+            document.querySelector('#form_autores').appendChild(nuevo_label_nombre)
+            document.querySelector('#form_autores').appendChild(nuevo_input_nombre)
+            document.querySelector('#form_autores').appendChild(nuevo_label_apellido)
+            document.querySelector('#form_autores').appendChild(nuevo_input_apellido)
+
+            //aumentamos el value de los formularios
+            total_forms.value = parseInt(total_forms.value) + 1;
+        }
+    </script>
+
+{% endblock extrajs %}
+
+

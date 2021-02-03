@@ -3,6 +3,7 @@ from django.urls import path
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from .views import *
+from .formsets import FormsetAutor
 
 urlpatterns = [
     path('listar_autores/',login_required(ListadoAutores.as_view()), name = 'listar_autores'),
@@ -22,6 +23,10 @@ urlpatterns = [
     path('listar-libros-reservados/',ListadoLibrosReservados.as_view(), name = 'listado_libros_reservados'),
     path('reservar-libro/',RegistrarReserva.as_view(), name = 'reservar_libro'),
     path('reservas-vencidas/',ReservasVencidas.as_view(), name = 'reservas_vencidas'),
+
+
+    #FORSETS
+    path('crear_autor_formset/', FormsetAutor.as_view(), name = 'crear_autor_formset')
 ]
 
 # URLs DE VISTAS IMPLICITAS
